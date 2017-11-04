@@ -41,6 +41,7 @@
                         <asp:TextBox ID="txtBirthday" runat="server" CssClass="form-control" ValidationGroup="createNew"></asp:TextBox>
                         <div>
                             <asp:RequiredFieldValidator ControlToValidate="txtBirthday" Display="Dynamic" Font-Bold="true" ForeColor="Red" ID="RequiredFieldValidator3" runat="server" ErrorMessage="Please enter birthday." ValidationGroup="createNew"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ControlToValidate="txtBirthday"  ID="RegularExpressionValidator1" runat="server" ErrorMessage="Please enter valid birthday" Font-Bold="True" ForeColor="Red" ValidationExpression="^([012]\d|30|31)/(([1-9])|([0]\d|10|11|12))/((19|20)\d{2})$"  Display="Dynamic" ValidationGroup="createNew"></asp:RegularExpressionValidator>
                         </div>
                     </div>
                 </div>
@@ -65,6 +66,7 @@
                         <asp:TextBox ID="txtPhoneNumber" runat="server" CssClass="form-control" ValidationGroup="createNew"></asp:TextBox>
                         <div>
                             <asp:RequiredFieldValidator ControlToValidate="txtPhoneNumber" Display="Dynamic" Font-Bold="true" ForeColor="Red" ID="RequiredFieldValidator5" runat="server" ErrorMessage="Please enter phone number." ValidationGroup="createNew"></asp:RequiredFieldValidator>
+                            <asp:RegularExpressionValidator ControlToValidate="txtPhoneNumber"  ID="RegularExpressionValidatorPhoneNumber" runat="server" ErrorMessage="Please enter valid phone number" Font-Bold="True" ForeColor="Red" ValidationExpression="^(0|\+84)\d{9,12}$"  Display="Dynamic" ValidationGroup="createNew"></asp:RegularExpressionValidator>
                         </div>
                     </div>
                 </div>
