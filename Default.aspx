@@ -85,7 +85,7 @@
             <div class="col-sm-12">
                 <div class="text-center">
                     <asp:LinkButton ID="btnCreateNew" CssClass="btn btn-default" OnClick="btnCreateNew_Click" ValidationGroup="createNew" runat="server"><i class="fa fa-plus"></i> Create New</asp:LinkButton>
-                    <asp:LinkButton ID="btnDelete" CssClass="btn btn-danger" OnClick="btnCreateNew_Click" runat="server"><i class="fa fa-trash"></i> Delete</asp:LinkButton>
+                    <asp:LinkButton ID="btnDelete" CssClass="btn btn-danger" OnClick="btnDelete_Click" runat="server" OnClientClick="return confirm('Are you sure?')"><i class="fa fa-trash"></i> Delete</asp:LinkButton>
                 </div>
             </div>
         </div>
