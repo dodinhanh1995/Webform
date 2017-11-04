@@ -107,8 +107,13 @@ public partial class _Default : System.Web.UI.Page
 
     protected void cbDeleteAll_CheckedChanged(object sender, EventArgs e)
     {
-
+        foreach (GridViewRow row in gvCustomer.Rows)
+        {
+            CheckBox cb = (CheckBox)row.FindControl("cbDeleteId");
+            cb.Checked = !cb.Checked;
+        }
     }
+
     protected void btnDelete_Click(object sender, EventArgs e)
     {
         string id = string.Empty;

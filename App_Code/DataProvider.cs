@@ -10,7 +10,7 @@ using System.Web;
 /// </summary>
 public static class DataProvider
 {
-	public static string  connString = @"Data Source=.\SQLEXPRESS; Initial Catelog=MyTest; Integrated Security=true";
+	public static string  connString = @"Data Source=.\SQLEXPRESS; Initial Catalog=MyTest; Integrated Security=true";
 
     public static DataTable ExcuteQuery(string query)
     {
