@@ -12,7 +12,7 @@ public static class DataProvider
 {
 	public static string  connString = @"Data Source=.\SQLEXPRESS; Initial Catelog=MyTest; Integrated Security=true";
 
-    public DataTable ExcuteQuery(string query)
+    public static DataTable ExcuteQuery(string query)
     {
         DataTable data = new DataTable();
 
@@ -26,7 +26,7 @@ public static class DataProvider
         return data;
     }
 
-    public bool ExcuteNonQuery(string query)
+    public static bool ExcuteNonQuery(string query)
     {
         bool isOk = false;
 
@@ -40,7 +40,7 @@ public static class DataProvider
         return isOk;
     }
 
-    public object ExcuteScalar(string query)
+    public static object ExcuteScalar(string query)
     {
         object data;
 
