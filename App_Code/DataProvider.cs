@@ -25,4 +25,32 @@ public static class DataProvider
 
         return data;
     }
+
+    public bool ExcuteNonQuery(string query)
+    {
+        bool isOk = false;
+
+        using (var conn = new SqlConnection(connString))
+        {
+            var cmd = new SqlCommand(query, conn);
+            conn.Open();
+            isOk = cmd.ExecuteNonQuery() > 0;
+        }
+
+        return isOk;
+    }
+
+    public object ExcuteScalar(string query)
+    {
+        object data;
+
+        using (var conn = new SqlConnection(connString))
+        {
+            var cmd = new SqlCommand(query, conn);
+            conn.Open();
+            data = cmd.ExecuteScalar();
+        }
+
+        return data;
+    }
 }
