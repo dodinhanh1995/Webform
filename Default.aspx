@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="content.css" type="text/css" />
 </head>
 <body>
@@ -41,7 +42,7 @@
                         <asp:TextBox ID="txtBirthday" runat="server" CssClass="form-control" ValidationGroup="createNew"></asp:TextBox>
                         <div>
                             <asp:RequiredFieldValidator ControlToValidate="txtBirthday" Display="Dynamic" Font-Bold="true" ForeColor="Red" ID="RequiredFieldValidator3" runat="server" ErrorMessage="Please enter birthday." ValidationGroup="createNew"></asp:RequiredFieldValidator>
-                            <asp:RegularExpressionValidator ControlToValidate="txtBirthday"  ID="RegularExpressionValidator1" runat="server" ErrorMessage="Please enter valid birthday" Font-Bold="True" ForeColor="Red" ValidationExpression="^([012]\d|30|31)/(([1-9])|([0]\d|10|11|12))/((19|20)\d{2})$"  Display="Dynamic" ValidationGroup="createNew"></asp:RegularExpressionValidator>
+                            <asp:RegularExpressionValidator ControlToValidate="txtBirthday" ID="RegularExpressionValidator1" runat="server" ErrorMessage="Please enter valid birthday" Font-Bold="True" ForeColor="Red" ValidationExpression="^([012]\d|30|31)/(([1-9])|([0]\d|10|11|12))/((19|20)\d{2})$" Display="Dynamic" ValidationGroup="createNew"></asp:RegularExpressionValidator>
                         </div>
                     </div>
                 </div>
@@ -66,7 +67,7 @@
                         <asp:TextBox ID="txtPhoneNumber" runat="server" CssClass="form-control" ValidationGroup="createNew"></asp:TextBox>
                         <div>
                             <asp:RequiredFieldValidator ControlToValidate="txtPhoneNumber" Display="Dynamic" Font-Bold="true" ForeColor="Red" ID="RequiredFieldValidator5" runat="server" ErrorMessage="Please enter phone number." ValidationGroup="createNew"></asp:RequiredFieldValidator>
-                            <asp:RegularExpressionValidator ControlToValidate="txtPhoneNumber"  ID="RegularExpressionValidatorPhoneNumber" runat="server" ErrorMessage="Please enter valid phone number" Font-Bold="True" ForeColor="Red" ValidationExpression="^(0|\+84)\d{9,12}$"  Display="Dynamic" ValidationGroup="createNew"></asp:RegularExpressionValidator>
+                            <asp:RegularExpressionValidator ControlToValidate="txtPhoneNumber" ID="RegularExpressionValidatorPhoneNumber" runat="server" ErrorMessage="Please enter valid phone number" Font-Bold="True" ForeColor="Red" ValidationExpression="^(0|\+84)\d{9,12}$" Display="Dynamic" ValidationGroup="createNew"></asp:RegularExpressionValidator>
                         </div>
                     </div>
                 </div>
@@ -83,10 +84,97 @@
 
             <div class="col-sm-12">
                 <div class="text-center">
-                    <asp:Button ID="btnCreateNew" CssClass="btn btn-default" runat="server" Text="Create New" OnClick="btnCreateNew_Click" ValidationGroup="createNew" />
-                    <asp:Button ID="btnDelete" runat="server" CssClass="btn btn-danger" Text="Delete" />
+                    <asp:LinkButton ID="btnCreateNew" CssClass="btn btn-default" OnClick="btnCreateNew_Click" ValidationGroup="createNew" runat="server"><i class="fa fa-plus"></i> Create New</asp:LinkButton>
+                    <asp:LinkButton ID="btnDelete" CssClass="btn btn-danger" OnClick="btnCreateNew_Click" runat="server"><i class="fa fa-trash"></i> Delete</asp:LinkButton>
                 </div>
             </div>
+        </div>
+
+        <div class="col-sm-12">
+            <br />
+            <asp:GridView ID="gvCustomer" AutoGenerateColumns="False" runat="server" CellPadding="4" DataKeyNames="Id" ForeColor="#333333" GridLines="None" Width="100%" OnRowUpdating="gvCustomer_RowUpdating">
+                <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
+                <Columns>
+                    <asp:TemplateField ShowHeader="False">
+                        <EditItemTemplate>
+                            <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="True" CommandName="Update" Text="Cập nhật"></asp:LinkButton>
+                            &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Hủy bỏ"></asp:LinkButton>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:CheckBox ID="cbDeleteId" runat="server" />
+                            <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Edit">
+                                <i class="fa fa-edit"></i>
+                            </asp:LinkButton>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="ID">
+                        <EditItemTemplate>
+                            <asp:Label ID="Label2" runat="server" Text='<%# Eval("Id") %>'></asp:Label>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label1" runat="server" Text='<%# Eval("Id") %>'></asp:Label>
+                        </ItemTemplate>
+                        <HeaderStyle HorizontalAlign="Left" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Name">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="TextBox1" runat="server" Text='<%# Eval("Name") %>'></asp:TextBox>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label3" runat="server" Text='<%# Eval("Name") %>'></asp:Label>
+                        </ItemTemplate>
+                        <HeaderStyle HorizontalAlign="Left" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Brithday">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtEditBrithday" runat="server" Text='<%# Eval("Brithday") %>'></asp:TextBox>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label4" runat="server" Text='<%# Eval("Birthday") %>'></asp:Label>
+                        </ItemTemplate>
+                        <HeaderStyle HorizontalAlign="Left" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Company Name">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtEditCompanyName" runat="server" Text='<%# Eval("CompanyName") %>'></asp:TextBox>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label5" runat="server" Text='<%# Eval("CompanyName") %>'></asp:Label>
+                        </ItemTemplate>
+                        <HeaderStyle HorizontalAlign="Left" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Phone Number">
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtEditPhoneNumber" runat="server" Text='<%# Eval("PhoneNumber") %>'></asp:TextBox>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label6" runat="server" Text='<%# Eval("PhoneNumber") %>'></asp:Label>
+                        </ItemTemplate>
+                        <HeaderStyle HorizontalAlign="Left" />
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Country">
+                        <EditItemTemplate>
+                            <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSourceCountry" DataTextField="Name" DataValueField="Id" SelectedValue='<%# Eval("CountryId") %>'>
+                            </asp:DropDownList>
+                            <asp:SqlDataSource ID="SqlDataSourceCountry" runat="server" ConnectionString="<%$ ConnectionStrings:MyTestConnectionString %>" SelectCommand="SELECT * FROM [Country]"></asp:SqlDataSource>
+                        </EditItemTemplate>
+                        <ItemTemplate>
+                            <asp:Label ID="Label7" runat="server" Text='<%# Eval("CountryName") %>'></asp:Label>
+                        </ItemTemplate>
+                        <HeaderStyle HorizontalAlign="Left" />
+                    </asp:TemplateField>
+                </Columns>
+                <EditRowStyle BackColor="#999999" />
+                <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                <HeaderStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="#284775" ForeColor="White" HorizontalAlign="Center" />
+                <RowStyle BackColor="#F7F6F3" ForeColor="#333333" />
+                <SelectedRowStyle BackColor="#E2DED6" Font-Bold="True" ForeColor="#333333" />
+                <SortedAscendingCellStyle BackColor="#E9E7E2" />
+                <SortedAscendingHeaderStyle BackColor="#506C8C" />
+                <SortedDescendingCellStyle BackColor="#FFFDF8" />
+                <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
+            </asp:GridView>
         </div>
     </form>
 
