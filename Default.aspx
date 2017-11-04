@@ -81,7 +81,7 @@
 
             <div class="col-sm-12">
                 <div class="text-center">
-                    <asp:Button ID="btnCreateNew" CssClass="btn btn-default" runat="server" Text="Create New" ValidationGroup="createNew" />
+                    <asp:Button ID="btnCreateNew" CssClass="btn btn-default" runat="server" Text="Create New" OnClick="btnCreateNew_Click" ValidationGroup="createNew" />
                     <asp:Button ID="btnDelete" runat="server" CssClass="btn btn-danger" Text="Delete" />
                 </div>
             </div>
