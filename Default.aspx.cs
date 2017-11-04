@@ -47,7 +47,7 @@ public partial class _Default : System.Web.UI.Page
             return;
         }
 
-       Response.Write("<script>alert('ERROR: Could not create new customer information')</script>");
+        Response.Write("<script>alert('ERROR: Could not create new customer information')</script>");
     }
 
     public void LoadDropDownListCountry()
@@ -61,7 +61,7 @@ public partial class _Default : System.Web.UI.Page
     public void LoadData()
     {
         gvCustomer.DataSource = DataProvider.ExcuteQuery("SELECT c.*, ct.Name as CountryName " +
-                                                        "FROM Customer as c " + 
+                                                        "FROM Customer as c " +
                                                         "INNER JOIN Country as ct " +
                                                         "ON c.CountryId = ct.Id");
         gvCustomer.DataBind();
@@ -111,6 +111,16 @@ public partial class _Default : System.Web.UI.Page
     }
     protected void btnDelete_Click(object sender, EventArgs e)
     {
-
+        string id = string.Empty;
+        foreach (GridViewRow row in gvCustomer.Rows)
+        {
+            CheckBox cb = (CheckBox)row.FindControl("cbDeleteId");
+            if (cb != null && cb.Checked)
+            {
+                id = gvCustomer.DataKeys[row.RowIndex].Value.ToString();
+                DataProvider.ExcuteNonQuery("DELETE FROM Customer WHERE Id = '" + id + "'");
+            }
+        }
+        LoadData();
     }
 }
