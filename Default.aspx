@@ -92,24 +92,28 @@
 
         <div class="col-sm-12">
             <br />
-            <asp:GridView ID="gvCustomer" AutoGenerateColumns="False" runat="server" CellPadding="4" DataKeyNames="Id" ForeColor="#333333" GridLines="None" Width="100%" OnRowUpdating="gvCustomer_RowUpdating">
+            <asp:GridView ID="gvCustomer" AutoGenerateColumns="False" runat="server" CellPadding="4" DataKeyNames="Id" ForeColor="#333333" GridLines="None" Width="100%" OnRowCancelingEdit="gvCustomer_RowCancelingEdit" OnRowEditing="gvCustomer_RowEditing" OnRowUpdating="gvCustomer_RowUpdating">
                 <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
                 <Columns>
                     <asp:TemplateField ShowHeader="False">
                         <EditItemTemplate>
-                            <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="True" CommandName="Update" Text="Cập nhật"></asp:LinkButton>
-                            &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CommandName="Cancel" Text="Hủy bỏ"></asp:LinkButton>
+                            <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="True" CssClass="btn btn-sm" CommandName="Update" Text="Cập nhật"></asp:LinkButton>
+                            &nbsp;<asp:LinkButton ID="LinkButton2" runat="server" CausesValidation="False" CssClass="btn btn-danger btn-sm" CommandName="Cancel" Text="Hủy bỏ"></asp:LinkButton>
                         </EditItemTemplate>
+                        <HeaderTemplate>
+                            <asp:CheckBox ID="cbDeleteAll" runat="server" OnCheckedChanged="cbDeleteAll_CheckedChanged" AutoPostBack="True" />
+                        </HeaderTemplate>
                         <ItemTemplate>
                             <asp:CheckBox ID="cbDeleteId" runat="server" />
                             <asp:LinkButton ID="LinkButton1" runat="server" CausesValidation="False" CommandName="Edit">
                                 <i class="fa fa-edit"></i>
                             </asp:LinkButton>
                         </ItemTemplate>
+                        <HeaderStyle HorizontalAlign="Left" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="ID">
                         <EditItemTemplate>
-                            <asp:Label ID="Label2" runat="server" Text='<%# Eval("Id") %>'></asp:Label>
+                            <asp:Label ForeColor="White" ID="Label2" runat="server" Text='<%# Eval("Id") %>'></asp:Label>
                         </EditItemTemplate>
                         <ItemTemplate>
                             <asp:Label ID="Label1" runat="server" Text='<%# Eval("Id") %>'></asp:Label>
@@ -118,7 +122,7 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Name">
                         <EditItemTemplate>
-                            <asp:TextBox ID="TextBox1" runat="server" Text='<%# Eval("Name") %>'></asp:TextBox>
+                            <asp:TextBox CssClass="form-control" ID="txtEditName" runat="server" Text='<%# Eval("Name") %>'></asp:TextBox>
                         </EditItemTemplate>
                         <ItemTemplate>
                             <asp:Label ID="Label3" runat="server" Text='<%# Eval("Name") %>'></asp:Label>
@@ -127,16 +131,16 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Brithday">
                         <EditItemTemplate>
-                            <asp:TextBox ID="txtEditBrithday" runat="server" Text='<%# Eval("Brithday") %>'></asp:TextBox>
+                            <asp:TextBox  CssClass="form-control"  ID="txtEditBirthday" runat="server" Text='<%# String.Format("{0:dd/MM/yyyy}", Eval("Birthday")) %>'></asp:TextBox>
                         </EditItemTemplate>
                         <ItemTemplate>
-                            <asp:Label ID="Label4" runat="server" Text='<%# Eval("Birthday") %>'></asp:Label>
+                            <asp:Label ID="Label4" runat="server" Text='<%# String.Format("{0:dd/MM/yyyy}", Eval("Birthday")) %>'></asp:Label>
                         </ItemTemplate>
                         <HeaderStyle HorizontalAlign="Left" />
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Company Name">
                         <EditItemTemplate>
-                            <asp:TextBox ID="txtEditCompanyName" runat="server" Text='<%# Eval("CompanyName") %>'></asp:TextBox>
+                            <asp:TextBox  CssClass="form-control" ID="txtEditCompanyName" runat="server" Text='<%# Eval("CompanyName") %>'></asp:TextBox>
                         </EditItemTemplate>
                         <ItemTemplate>
                             <asp:Label ID="Label5" runat="server" Text='<%# Eval("CompanyName") %>'></asp:Label>
@@ -145,7 +149,7 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Phone Number">
                         <EditItemTemplate>
-                            <asp:TextBox ID="txtEditPhoneNumber" runat="server" Text='<%# Eval("PhoneNumber") %>'></asp:TextBox>
+                            <asp:TextBox CssClass="form-control"  ID="txtEditPhoneNumber" runat="server" Text='<%# Eval("PhoneNumber") %>'></asp:TextBox>
                         </EditItemTemplate>
                         <ItemTemplate>
                             <asp:Label ID="Label6" runat="server" Text='<%# Eval("PhoneNumber") %>'></asp:Label>
@@ -154,7 +158,7 @@
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Country">
                         <EditItemTemplate>
-                            <asp:DropDownList ID="DropDownList1" runat="server" DataSourceID="SqlDataSourceCountry" DataTextField="Name" DataValueField="Id" SelectedValue='<%# Eval("CountryId") %>'>
+                            <asp:DropDownList  CssClass="form-control" ID="ddlEditCountry" runat="server" DataSourceID="SqlDataSourceCountry" DataTextField="Name" DataValueField="Id" SelectedValue='<%# Eval("CountryId") %>'>
                             </asp:DropDownList>
                             <asp:SqlDataSource ID="SqlDataSourceCountry" runat="server" ConnectionString="<%$ ConnectionStrings:MyTestConnectionString %>" SelectCommand="SELECT * FROM [Country]"></asp:SqlDataSource>
                         </EditItemTemplate>
